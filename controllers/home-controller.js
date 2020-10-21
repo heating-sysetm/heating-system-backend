@@ -1,11 +1,25 @@
 const models = require("../models");
 
 exports.getAll = function (req, res, next) {
-  res.send({ title: "Express" });
+    models.Home.findAll().then(
+        (homes)=>{
+            res.status(200).send({
+                message: "",
+                data: homes
+            });
+        }
+    )
+    .catch((err)=>{
+        res.status(200).send({
+            message: "Could not find any homes",
+            data: err
+        });
+        }
+    );
 };
 
 exports.addHome = function (req, res, next) {
-  return models.Home
+  models.Home
     .create({
       name: req.body.name,
       url: req.body.url,
@@ -15,11 +29,11 @@ exports.addHome = function (req, res, next) {
         message: "Home created succesfully.",
         data: home,
       })
-      .catch(err =>{
+    })
+    .catch(err =>{
         res.send({
             message: "Could not create home",
             data:err
           })
       });
-    });
 };
