@@ -1,6 +1,6 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  var home = sequelize.define("Home", {
+  var Home = sequelize.define("Home", {
     id: {
       allowNull: false,
       primaryKey: true,
@@ -16,5 +16,5 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
   });
-  return home;
+  return Home;
 };
