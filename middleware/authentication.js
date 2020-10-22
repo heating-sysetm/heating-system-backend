@@ -6,7 +6,9 @@ exports.ensureToken = function (req, res, next) {
     const authHeader = req.headers['authorization'] 
        
     if(typeof authHeader== 'undefined') return res.sendStatus(401)
+
     const token =authHeader.split(' ')[1]
+
     if (token == '') return res.sendStatus(401) // if there isn't any token
     jwt.verify(token,'SECRET', (err, user) => {
         console.log(err);
@@ -15,7 +17,6 @@ exports.ensureToken = function (req, res, next) {
         next() // pass the execution off to whatever request the client intended
       })
   }
-
 
   exports.getToken = function (req, res, next) {
     const user = {id:1};
