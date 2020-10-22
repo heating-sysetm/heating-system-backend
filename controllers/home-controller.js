@@ -57,3 +57,23 @@ exports.editHome = function (req, res, next) {
       });
     });
 };
+
+exports.deleteHome = function (req, res, next) {
+  return models.Home.destroy({
+    where:{
+      id:req.params.home_id
+    }
+  })
+    .then((home) => {
+      res.status(200).send({
+        message: "Home deleted succesfully.",
+        data: home,
+      });
+    })
+    .catch((err) => {
+      res.send({
+        message: "Could not delete home",
+        data: err,
+      });
+    });
+};

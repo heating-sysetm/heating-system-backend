@@ -6,6 +6,7 @@ let homes =  require('../controllers/home-controller.js');
 
 router.get('/homes', homes.getAll);
 router.post('/add-home',homes.addHome);
-router.post('/homes/:home_id/edit-home',homes.editHome);
+router.put('/homes/:home_id/edit-home',homes.editHome);
+router.delete('/homes/:home_id/delete-home',homes.deleteHome);
 
 module.exports = router;
