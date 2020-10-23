@@ -90,10 +90,14 @@ client.on("connect", function (connection) {
   });
 });
 
-server.listen(8070, function () {
-  console.log(new Date() + " Server is listening on port 8070");
-});
+exports.runWebSocket=function () {
 
-client.connect("http://localhost:8080", "echo-protocol");
+    server.listen(8070, function () {
+        console.log(new Date() + " Server is listening on port 8070");
+      });
+      
+      client.connect("http://localhost:8080", "echo-protocol");
+          
+}
 
 
