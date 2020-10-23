@@ -1,12 +1,16 @@
 "temperature strict";
 module.exports = {
     up:(queryInterface,sequelize) =>{
-        return queryInterface.createTable('Temperature',{
+        return queryInterface.createTable('Temperatures',{
             id:{
                 allowNull:false,
                 primaryKey:true,
                 type:sequelize.UUID,
                 defaultValue:sequelize.UUIDV4,
+            },
+            name:{
+                allowNull:false,
+                type:sequelize. STRING
             },
             createdAt:{
                 allowNull:false,
@@ -27,6 +31,6 @@ module.exports = {
         });
     },
     down: (queryInterface,sequelize) =>{
-        return queryInterface.dropTable('Temperature');
+        return queryInterface.dropTable('Temperatures');
     }
 };

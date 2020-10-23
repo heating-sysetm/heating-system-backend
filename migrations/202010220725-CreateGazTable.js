@@ -1,12 +1,16 @@
-"gaz strict";
+"gazes strict";
 module.exports = {
     up:(queryInterface,sequelize) =>{
-        return queryInterface.createTable('Gaz',{
+        return queryInterface.createTable('Gazes',{
             id:{
                 allowNull:false,
                 primaryKey:true,
                 type:sequelize.UUID,
                 defaultValue:sequelize.UUIDV4,
+            },
+            name:{
+                allowNull:false,
+                type:sequelize. STRING
             },
             createdAt:{
                 allowNull:false,
@@ -27,6 +31,6 @@ module.exports = {
         });
     },
     down: (queryInterface,sequelize) =>{
-        return queryInterface.dropTable('Gaz');
+        return queryInterface.dropTable('Gazes');
     }
 };
