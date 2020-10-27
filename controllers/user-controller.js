@@ -22,14 +22,15 @@ exports.addUser = function (req, res, next) {
     username: req.body.username,
     password: req.body.password,
     isAdmin: false
-  })
-    .then((res) => {
-      res.status(200).send({
+  }).then(result=> {
+      console.log('++',result);
+      res.send({
         message: "User added succesfully.",
-        data: res,
+        data: result,
       });
     })
-    .catch((err) => {
+    .catch(err=> {
+      console.log('--',err);
       res.send({
         message: "Could not add user",
         data: err,
@@ -81,3 +82,18 @@ exports.deleteUser = function (req, res, next) {
       });
     });
 };
+
+exports.findUser= function (username,pass){
+  return models.User.findOne({
+    where:{
+      username:username,
+      password:pass
+    }
+  })
+    .then((res) => {      
+        return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
