@@ -10,7 +10,7 @@ var homeRouter = require('./routes/home');
 var socket = require('./web_socket/wsoket');
 
 var app = express();
-socket.run();
+// socket.run();
 
 var corsOptions = {
   origin: 'http://localhost:4200',
