@@ -3,7 +3,7 @@ const models = require("../models");
 exports.getAllGaz = function () {
   return models.Gaz.findAll({
     limit: 10,
-    order: [ [ 'createdAt' ]]
+    order: [["createdAt"]],
   })
     .then((res) => {
       return res;
@@ -14,15 +14,17 @@ exports.getAllGaz = function () {
 };
 
 exports.addGaz = function (data) {
-  models.Gaz.create({
-    name: data.name,
-    code: data.code,
-    data: data.data
-  })
-    .then((res) => {
-      return res;
+  return new Promise((resolve, reject) => {
+    models.Gaz.create({
+      name: data.name,
+      code: "101",
+      data: data.data,
     })
-    .catch((err) => {
-        return err;
-    });
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };
