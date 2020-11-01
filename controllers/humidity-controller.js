@@ -1,23 +1,25 @@
 const models = require("../models");
 result = "";
-exports.getAllTemperature = function () {
-  return models.Temperature.findAll({
+exports.getAllHumidity = function () {
+  return models.Humidity.findAll({
     limit: 10,
     order: [["createdAt"]],
   })
-    .then((Temperature) => {
-      return Temperature;
+    .then((Humidity) => {
+      return Humidity;
     })
     .catch((err) => {
       return err;
     });
 };
 
-exports.addTemperature = function (data) {
-  console.log(data);
-  
+exports.addHumidity = function (data) {
+  console.log('addhumidity',data);
   return new Promise((resolve, reject) => {
-    if (data.name!="" & data.data!="") {
+    if (data.name & data.data) 
+    {
+      console.log('addhumidity',data.name);
+      
       models.Temperature.create({
         name: data.name,
         code: "202",
