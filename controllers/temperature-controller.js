@@ -1,9 +1,9 @@
 const models = require("../models");
-result='';
+result = "";
 exports.getAllTemperature = function () {
   return models.Temperature.findAll({
     limit: 10,
-    order: [ [ 'createdAt' ]]
+    order: [["createdAt"]],
   })
     .then((Temperature) => {
       return Temperature;
@@ -13,22 +13,23 @@ exports.getAllTemperature = function () {
     });
 };
 
-exports.addTemperature =function (data) {
+exports.addTemperature = function (data) {
   return new Promise((resolve, reject) => {
-    models.Temperature.create({
-      name: data.name,
-      code: data.code,
-      data: data.data
-    })
-      .then((res) => { 
-        resolve(res); 
+    if (data.name & data.data) {
+      models.Temperature.create({
+        name: data.name,
+        code: "202",
+        data: data.data,
       })
-      .catch((err) => {
-        reject(err); 
-      });
-    });
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    }
+  });
 };
-
 
 // exports.deleteTemperature = function (req, res, next) {
 //   return models.Temperature.destroy({
