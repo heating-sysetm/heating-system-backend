@@ -11,10 +11,22 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING,
     },
+    deviceCode: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
     url: {
       allowNull: false,
       type: DataTypes.STRING,
     },
+    port: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    max:{
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    }
   });
   return Home;
 };

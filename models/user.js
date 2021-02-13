@@ -24,6 +24,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue:false
     },
+    sendSMS: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN,
+      defaultValue:false
+    },
+    phone:{
+      allowNull: false,
+      type: DataTypes.STRING,
+    }
   });
   return User;
 };

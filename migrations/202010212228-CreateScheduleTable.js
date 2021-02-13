@@ -1,38 +1,41 @@
 "user strict";
 module.exports = {
   up: (queryInterface, sequelize) => {
-    return queryInterface.createTable("Users", {
+    return queryInterface.createTable("Schedules", {
       id: {
         allowNull: false,
         primaryKey: true,
         type: sequelize.UUID,
         defaultValue: sequelize.UUIDV4,
       },
-      name: {
+      startDate: {
+        allowNull: false,
+        type: sequelize.DATE,
+      },
+      startTime: {
         allowNull: false,
         type: sequelize.STRING,
       },
-      username: {
+      endDate: {
+        allowNull: false,
+        type: sequelize.DATE,
+      },
+      endTime: {
         allowNull: false,
         type: sequelize.STRING,
       },
-      password: {
+
+      boyler: {
         allowNull: false,
         type: sequelize.STRING,
       },
-      isAdmin: {
+      status: {
         allowNull: false,
         type: sequelize.BOOLEAN,
-        defaultValue: false,
       },
-      sendSMS: {
+      homeId: {
         allowNull: false,
-        type: sequelize.BOOLEAN,
-        defaultValue: false,
-      },
-      phone: {
-        allowNull: false,
-        type: sequelize.STRING,
+        type: sequelize.UUID,
       },
       createdAt: {
         allowNull: false,
@@ -45,6 +48,6 @@ module.exports = {
     });
   },
   down: (queryInterface, sequelize) => {
-    return queryInterface.dropTable("Users");
+    return queryInterface.dropTable("Schedules");
   },
 };

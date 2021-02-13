@@ -1,16 +1,16 @@
+#!/usr/bin/env node
 var WebSocketServer = require('websocket').server;
 var http = require('http');
- 
+
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
     response.writeHead(404);
     response.end();
 });
-
 server.listen(8070, function() {
-    console.log((new Date()) + ' Server is listening on port 8080');
+    console.log((new Date()) + ' Server is listening on port 8070');
 });
- 
+
 wsServer = new WebSocketServer({
     httpServer: server,
     // You should not use autoAcceptConnections for production
@@ -20,12 +20,12 @@ wsServer = new WebSocketServer({
     // to accept it.
     autoAcceptConnections: false
 });
- 
+
 function originIsAllowed(origin) {
   // put logic here to detect whether the specified origin is allowed.
   return true;
 }
- 
+
 wsServer.on('request', function(request) {
     if (!originIsAllowed(request.origin)) {
       // Make sure we only accept requests from an allowed origin
@@ -34,11 +34,8 @@ wsServer.on('request', function(request) {
       return;
     }
     
-
-    var connection = request.accept('', request.origin);
+    var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
-
-
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
             console.log('Received Message: ' + message.utf8Data);
@@ -49,23 +46,29 @@ wsServer.on('request', function(request) {
             connection.sendBytes(message.binaryData);
         }
     });
-
-
-    connection.on('close', function(reasonCode, description) {
-        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
-    });
-
-
     function sendNumber() {
         if (connection.connected) {
-            var number = Math.round(Math.random() * 0xFFFFFF);
-            let data={name:'temp',code:'A123.456',data:number};
-            data=JSON.stringify(data);
-            connection.send(data);
-            console.log('*************** send to node js ****************');
-            
+            // var number = Math.round(Math.random() * 0xFFFFFF);
+            var data={
+                deviceName:'adasd',deviceCode:'201'
+                ,outTemperature:Math.floor(Math.random() * (80))
+                ,outHumidity:Math.floor(Math.random() * (80))
+                ,outPutTemperature:Math.floor(Math.random() * (80))
+                ,inPutTemperature:Math.floor(Math.random() * (80))
+                ,boiler1:Math.floor(Math.random() * (80))
+                ,boiler2:Math.floor(Math.random() * (80))
+                ,boiler3:Math.floor(Math.random() * (80))
+                ,boiler4:Math.floor(Math.random() * (80))
+                ,cistern:Math.floor(Math.random() * (80))
+                ,gasSensor1:Math.floor(Math.random() * (80))
+                ,gasSensor2:Math.floor(Math.random() * (80))
+            };
+            connection.sendUTF(JSON.stringify(data));
             setTimeout(sendNumber, 1000);
         }
     }
     sendNumber();
+    connection.on('close', function(reasonCode, description) {
+        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+    });
 });

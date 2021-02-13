@@ -1,24 +1,30 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  var Gaz = sequelize.define("Gaz", {
+  var notif = sequelize.define("Notif", {
     id: {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    name: {
+
+    title: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    code: {
+    msg: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    data: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    }
+    homeId: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      isRead:{
+        allowNull: false,
+      type: DataTypes.BOOLEAN,
+      defaultValue:false
+      },
   });
-  return Gaz;
+  return notif;
 };

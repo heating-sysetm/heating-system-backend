@@ -4,9 +4,10 @@ const jwt = require("jsonwebtoken");
 exports.ensureToken = function (req, res, next) {
   // Gather the jwt access token from the request header
   const authHeader = req.headers["authorization"];
-
+  // console.log(typeof authHeader == "undefined");
   if (typeof authHeader == "undefined") return res.sendStatus(401);
-
+  
+  
   const token = authHeader.split(" ")[1];
 
   if (token == "") return res.sendStatus(401); // if there isn't any token

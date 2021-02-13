@@ -1,11 +1,21 @@
 var express = require('express');
 var router = express.Router();
 let homes =  require('../controllers/home-controller.js');
+let sensors= require('../controllers/sensor-value-controller');
+let notif = require('../controllers/notif-controller');
 let auth = require('../middleware/authentication.js');
-
-router.get('/all',auth.ensureToken,homes.getAll);
-router.post('/add-home',auth.ensureToken,homes.addHome);
-router.put('/:home_id/edit-home',auth.ensureToken,homes.editHome);
-router.delete('/:home_id/delete-home',auth.ensureToken,homes.deleteHome);
-
+// ,auth.ensureToken
+router.get('/all',homes.getAll);
+router.post('/add-home',homes.addHome);
+router.put('/:home_id/edit-home',homes.editHome);
+router.delete('/:home_id/delete-home',homes.deleteHome);
+router.post('/getGasValues',sensors.getGasValues);
+router.post('/getBoylersValues',sensors.getBoylersValues);
+router.post('/getCisternValues',sensors.getCisternValues);
+router.post('/getInOutValues',sensors.getInOutValues);
+router.get('/all-values',sensors.AllSensorsValues);
+router.get('/unread_notifs',notif.getNotifs);
+router.put('/read_notif/:notif_id',notif.editNotif);
+router.get('/all_notifs',notif.getAllNotifs);
+router.post('/add_notif',notif.addNotif);
 module.exports = router;

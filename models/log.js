@@ -1,17 +1,13 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  var Temperature = sequelize.define("Temperature", {
+  var Log = sequelize.define("Log", {
     id: {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    name: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
-    code: {
+    title: {
       allowNull: false,
       type: DataTypes.STRING,
     },
@@ -19,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING,
     }
+
   });
-  return Temperature;
+  return Log;
 };
