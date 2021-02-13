@@ -1,6 +1,6 @@
 module.exports={
   "development": {
-    "username": "heating-system-userdb",
+    "username": "heating-system",
     "password": "123.456",
     "database": "heating-system-db",
     "host": "127.0.0.1",
